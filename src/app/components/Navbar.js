@@ -20,7 +20,7 @@ export default function Navbar() {
 
 
     }catch(error){
-      console.log(error.message)
+      // console.log(error.message)
       toast.error(error.message,{
         duration:2000,
         position:"top-center"

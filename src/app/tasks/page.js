@@ -18,7 +18,7 @@ export default function TasksPage() {
     // API call to add task
     try {
       const response = await axios.post("/api/addtask", data);
-      console.log(response);
+      // console.log(response);
       toast.success('add task successfully', {
         duration: 2000,
         position: 'top-center'
@@ -29,7 +29,7 @@ export default function TasksPage() {
       const updatedTasks = await axios.get("/api/gettasks");
       setTasks(updatedTasks.data.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message, {
         duration: 2000,
         position: 'top-center',
@@ -45,11 +45,11 @@ export default function TasksPage() {
   useEffect(() => {
     const getTasks = async () => {
       try {
-        console.log("Fetching tasks...");
+        // console.log("Fetching tasks...");
         const response = await axios.get("/api/gettasks");
         setTasks(response.data.data);
       } catch (error) {
-        console.log("Error fetching tasks: " + error.message);
+        // console.log("Error fetching tasks: " + error.message);
       } finally {
         setDataLoading(false);
       }

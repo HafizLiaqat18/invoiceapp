@@ -7,9 +7,9 @@ export async function POST(request){
      await   connect();
     const reqBody = await request.json();
     const {firstName,lastName,email,age,phone} = reqBody;
-    console.log(reqBody)
+    // console.log(reqBody)
     const findUser = await UserSchema.findOne({email});
-    console.log("find User " + findUser)
+    // console.log("find User " + findUser)
     if(findUser){
         return NextResponse.json({error:"Email Already exist !",success:false},{status:409});
     }
