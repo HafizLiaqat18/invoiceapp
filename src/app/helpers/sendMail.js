@@ -2,7 +2,7 @@
 import nodemailer from "nodemailer"
 
 export async function sendMail( user, pdfBytes ) {
-    console.log(user)
+    // console.log(user)
    
 
     try {
