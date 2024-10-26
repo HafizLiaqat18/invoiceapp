@@ -17,7 +17,7 @@ export default function UsersPage() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await axios.get("/api/getusers");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/getusers`);
         setUsers(response.data.data);
       } catch (error) {
         toast.error(error.message, {
@@ -35,7 +35,7 @@ export default function UsersPage() {
   const onSubmitAddUser = async (data) => {
     setLoading(true);
     try {
-      await axios.post("/api/adduser", data);
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/adduser`, data);
       toast.success('User added successfully', {
         position: 'top-center',
         duration: 2000,
@@ -54,7 +54,7 @@ export default function UsersPage() {
 
   // Fetch users after adding/updating/deleting
   const fetchUsers = async () => {
-    const response = await axios.get("/api/getusers");
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/getusers`);
     setUsers(response.data.data);
   };
 
@@ -62,7 +62,7 @@ export default function UsersPage() {
   const onSubmitUpdateUser = async (data) => {
     setLoading(true);
     try {
-      await axios.put(`/api/updateuser`, data); // Use user ID for updating
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/updateuser`, data); // Use user ID for updating
       toast.success('User updated successfully', {
         position: 'top-center',
         duration: 2000,
@@ -82,24 +82,27 @@ export default function UsersPage() {
 
   // Handle user deletion
   // Handle user deletion
-const handleDeleteUser = async (id) => {
-  setDeleteLoading(true);
-  try {
-    await axios.delete(`/api/deleteuser`, { data: { id } }); // Pass id as request body in case of a POST/DELETE
-    toast.success('User deleted successfully', {
-      position: 'top-center',
-      duration: 2000,
-    });
-    fetchUsers();
-  } catch (error) {
-    toast.error(error.message, {
-      position: 'top-center',
-      duration: 1000,
-    });
-  } finally {
-    setDeleteLoading(false);
-  }
-};
+  const handleDeleteUser = async (email) => {
+    setDeleteLoading(true);
+    try {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/deleteuser`, {
+        data: { email }, // Include email in the data property
+      });
+      toast.success('User deleted successfully', {
+        position: 'top-center',
+        duration: 2000,
+      });
+      fetchUsers();
+    } catch (error) {
+      toast.error(error.message, {
+        position: 'top-center',
+        duration: 1000,
+      });
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+  
 
 
   return (
@@ -141,7 +144,7 @@ const handleDeleteUser = async (id) => {
                           Edit
                         </button>
                         <button
-                          onClick={() => handleDeleteUser(user.id)}
+                          onClick={() => handleDeleteUser(user.email)}
                           className="text-red-500 hover:underline"
                           disabled={deleteLoading}
                         >

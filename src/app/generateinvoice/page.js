@@ -15,8 +15,8 @@ export default function InvoiceGenerator() {
         // Fetch users and tasks
         const fetchUsersAndTasks = async () => {
             try {
-                const usersResponse = await axios.get("/api/getusers");
-                const tasksResponse = await axios.get("/api/gettasks");
+                const usersResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/getusers`);
+                const tasksResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/gettasks`);
                 setUsers(usersResponse.data.data);
                 setTasks(tasksResponse.data.data);
             } catch (error) {
@@ -60,7 +60,7 @@ export default function InvoiceGenerator() {
         };
     
         try {
-            await axios.post("/api/generateinvoice", invoice);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/generateinvoice`, invoice);
             toast.success('Invoice generated successfully', {
                 duration: 2000,
                 position: 'top-center'

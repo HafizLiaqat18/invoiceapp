@@ -7,10 +7,10 @@ export async function DELETE(request) {
     await connect();
     const reqBody = await request.json();
     console.log(reqBody);
-    const { title } = reqBody;
+    const { _id } = reqBody;
 
     // Check if the task exists
-    const existingTask = await TaskSchema.findOne({ title });
+    const existingTask = await TaskSchema.findOne({_id});
 
     if (!existingTask) {
       console.log("!update task -3");
@@ -21,7 +21,7 @@ export async function DELETE(request) {
     }
 
     // If the task exists, delete it
-    await TaskSchema.findOneAndDelete({ title });
+    await TaskSchema.findOneAndDelete({_id});
     console.log("!update task -4");
     
     return NextResponse.json(

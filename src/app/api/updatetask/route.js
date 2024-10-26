@@ -8,16 +8,16 @@ export async function PUT(request) {
     const reqBody = await request.json();
     const { title, description, price } = reqBody;
 
-    console.log("update task -1")
+  
     const updatedTask = await TaskSchema.findOneAndUpdate(
         { title },
         { description, price },
         
     );
-    console.log("update task -2")
+   
 
     if (!updatedTask) {
-        console.log("!update task -3")
+       
         return NextResponse.json(
             { error: "Task with this title does not exist!", success: false },
             { status: 404 }

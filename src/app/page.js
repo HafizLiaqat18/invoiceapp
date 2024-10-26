@@ -20,7 +20,7 @@ const AdminLogin = () => {
         setLoading(true); // Set loading to true when starting login
 
         try {
-            const response = await axios.post("/api/admin/login", {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/login`, {
                 email,
                 password,
             });

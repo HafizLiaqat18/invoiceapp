@@ -28,8 +28,12 @@ export async function POST(request) {
         );
 
         const response = NextResponse.json({ message: "User Login Successfully!", success: true }, { status: 200 });
-        response.cookies.set("token", token, { httpOnly: true, expires: new Date(Date.now() + 2 * 60 * 60 * 1000) });
-        return response;
+        response.cookies.set("token", token, { 
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === 'production', 
+            expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
+          });
+return response;          
     } catch (error) {
         return NextResponse.json({ error: error.message, success: false }, { status: 500 });
     }
