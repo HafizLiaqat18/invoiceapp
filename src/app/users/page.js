@@ -17,7 +17,7 @@ export default function UsersPage() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/getusers`);
+        const response = await axios.get(`/api/getusers`);
         setUsers(response.data.data);
       } catch (error) {
         toast.error(error.message, {
@@ -35,7 +35,7 @@ export default function UsersPage() {
   const onSubmitAddUser = async (data) => {
     setLoading(true);
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/adduser`, data);
+      await axios.post(`/api/adduser`, data);
       toast.success('User added successfully', {
         position: 'top-center',
         duration: 2000,
@@ -54,7 +54,7 @@ export default function UsersPage() {
 
   // Fetch users after adding/updating/deleting
   const fetchUsers = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/getusers`);
+    const response = await axios.get(`/api/getusers`);
     setUsers(response.data.data);
   };
 
@@ -62,7 +62,7 @@ export default function UsersPage() {
   const onSubmitUpdateUser = async (data) => {
     setLoading(true);
     try {
-      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/updateuser`, data); // Use user ID for updating
+      await axios.put(`/api/updateuser`, data); // Use user ID for updating
       toast.success('User updated successfully', {
         position: 'top-center',
         duration: 2000,
@@ -85,7 +85,7 @@ export default function UsersPage() {
   const handleDeleteUser = async (email) => {
     setDeleteLoading(true);
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/deleteuser`, {
+      await axios.delete(`/api/deleteuser`, {
         data: { email }, // Include email in the data property
       });
       toast.success('User deleted successfully', {

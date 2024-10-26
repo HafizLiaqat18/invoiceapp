@@ -11,7 +11,7 @@ export default function Navbar() {
 
   async function logoutHandle(){
     try{
-       await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/logout`);
+       await axios.get(`/api/logout`);
       toast.success("Logout Successfully",{
         duration:2000,
         position:"top-center"

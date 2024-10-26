@@ -19,7 +19,7 @@ export default function TasksPage() {
   const onSubmitAdd = async (data) => {
     setLoadingAdd(true);
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/addtask`, data);
+      await axios.post(`/api/addtask`, data);
       toast.success('Task added successfully', {
         duration: 2000,
         position: 'top-center'
@@ -41,7 +41,7 @@ export default function TasksPage() {
   // Fetch tasks on component mount
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/gettasks`);
+      const response = await axios.get(`/api/gettasks`);
       setTasks(response.data.data);
     } catch (error) {
       toast.error('Error fetching tasks: ' + error.message, {
@@ -57,7 +57,7 @@ export default function TasksPage() {
   const onSubmitUpdate = async (data) => {
     setLoadingUpdate(true);
     try {
-      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/updatetask`, data);
+      await axios.put(`/api/updatetask`, data);
       toast.success('Task updated successfully', {
         duration: 2000,
         position: 'top-center'
@@ -81,7 +81,7 @@ export default function TasksPage() {
   const handleDelete = async (taskId) => {
     if (confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/deletetask/`,{data:{_id : taskId}});
+        await axios.delete(`/api/deletetask/`,{data:{_id : taskId}});
 
         toast.success('Task deleted successfully', {
           duration: 2000,
